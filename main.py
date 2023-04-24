@@ -6,7 +6,7 @@ Filetypes = {}
 Tries = 0
 while Tries == 0:
 # Input a filepath and then the files in that folder get listed out
-  Filepath = input('Input the file path: ').lower()
+  Filepath = input('Input the file path: ')
   Directory = Filepath
 # Tries to list the directory inputed and if there's an error it lets the user retry
   try:
