@@ -30,3 +30,19 @@ if Tries == 1:
       Filetypes[Extention] = []
     Filetypes[Extention].append(file)
   print(Filetypes)
+
+  if any(filetype in Filetypes for filetype in ImageTypes):
+        ImageFolder = os.path.join(Directory, 'Images')
+        os.makedirs(ImageFolder, exist_ok=True)
+
+  if any(filetype in Filetypes for filetype in TextTypes):
+        TextFolder = os.path.join(Directory, 'Text Documents')
+        os.makedirs(TextFolder, exist_ok=True)
+
+  if any(filetype in Filetypes for filetype in VideoTypes):
+        VideoFolder = os.path.join(Directory, 'Videos')
+        os.makedirs(VideoFolder, exist_ok=True)
+
+  if any(filetype in Filetypes for filetype in PDF):
+        PDFFolder = os.path.join(Directory, 'PDF')
+        os.makedirs(PDFFolder, exist_ok=True)
