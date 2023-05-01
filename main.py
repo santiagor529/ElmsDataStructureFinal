@@ -1,6 +1,10 @@
 import os
-
-Filenames = []
+import shutil
+#Lists of various file types
+ImageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
+TextTypes = ['.txt', '.doc', '.docx']
+VideoTypes = ['.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv', '.mpg', '.mpeg', '.m4v', '.webm']
+PDF = ['.pdf']
 Filetypes = {}
 #Creating a while loop so that the program doesn't just end if wrong input
 Tries = 0
