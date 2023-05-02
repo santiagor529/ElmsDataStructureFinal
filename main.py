@@ -15,13 +15,13 @@ while Tries == 0:
 #Tries to list the directory inputed and if there's an error it lets the user retry
   try:
     ListDirectory = os.listdir(Directory)
-    print(ListDirectory, '\n')
+    print("This is what's in your folder:", ListDirectory, '\n')
     Tries += 1
   except:
     print('Not a valid file path. The folder was not found.')
-    Retry = input('Would you like to try again? Y/N: ')
-    if Retry.lower() != 'y':
-      Tries += 2
+    Retry = input('Would you like to try again? Y/N: ').casefold()
+    if Retry != 'y':
+      break
 #Looping through the files and putting them in a dictionary if they're not in already
 if Tries == 1:
   for file in ListDirectory:
@@ -31,9 +31,9 @@ if Tries == 1:
     Filetypes[Extention].append(file)
   print(Filetypes)
 #Default or Custom folder names
-  Rename = input('\nWould you like to rename your new folders? Y/N: ')
+  Rename = input('\nWould you like to rename your new folders? Y/N: ').casefold()
 #Creates new folder if file type exists and if the folder doesn't exist already
-  if Rename.lower() != 'y':
+  if Rename != 'y':
     if any(filetype in Filetypes for filetype in ImageTypes):
       ImageFolder = os.path.join(Directory, 'Images')
       os.makedirs(ImageFolder, exist_ok=True)
@@ -71,3 +71,33 @@ if Tries == 1:
       PDFFolder = os.path.join(Directory, PDFName)
       os.makedirs(PDFFolder, exist_ok=True)
     print('\nCreated!')
+#Looping through the dictionary and moving the files to their new folders
+  print('Moving your files...')
+  for extension in Filetypes.keys():
+    Files = Filetypes[extension]
+    for file in Files:
+      if extension in ImageTypes:
+        if Rename == 'y':
+          shutil.move(os.path.join(Directory, file), os.path.join(ImageFolder, file))
+        else:
+          shutil.move(os.path.join(Directory, file), os.path.join(ImageFolder, file))
+          
+      elif extension in VideoTypes:
+        if Rename == 'y':
+          shutil.move(os.path.join(Directory, file), os.path.join(VideoFolder, file))
+        else:
+          shutil.move(os.path.join(Directory, file), os.path.join(VideoFolder, file))
+          
+      elif extension in TextTypes:
+        if Rename == 'y':
+          shutil.move(os.path.join(Directory, file), os.path.join(TextFolder, file))
+        else:
+          shutil.move(os.path.join(Directory, file), os.path.join(TextFolder, file))
+          
+      elif extension in PDF:
+        if Rename == 'y':
+          shutil.move(os.path.join(Directory, file), os.path.join(PDFFolder, file))
+        else:
+          shutil.move(os.path.join(Directory, file), os.path.join(PDFFolder, file))
+  print('Files organized!\n')
+  print('This is what the folder looks like now:', ListDirectory)
