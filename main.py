@@ -1,11 +1,17 @@
 import os
 import shutil
+
+#INSTRUCTIONS TO READ BEFOREHAND
+print('INSTRUCTIONS:')
+print("If you're using this on replit then the file path you should be using is just 'Files' After the files are organized, it should print what the Folder looks like after, but you can check it yourself by clicking the 'Show code' button. If you have the replit invite link please move the files back and delete the created folders after use.\n\n")
+
 #Lists of various file types
 ImageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
 TextTypes = ['.txt', '.doc', '.docx']
 VideoTypes = ['.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv', '.mpg', '.mpeg', '.m4v', '.webm']
 PDF = ['.pdf']
 Filetypes = {}
+
 #Creating a while loop so that the program doesn't just end if wrong input
 Tries = 0
 while Tries == 0:
@@ -22,6 +28,7 @@ while Tries == 0:
     Retry = input('Would you like to try again? Y/N: ').casefold()
     if Retry != 'y':
       break
+
 #Looping through the files and putting them in a dictionary if they're not in already
 if Tries == 1:
   for file in ListDirectory:
@@ -30,8 +37,10 @@ if Tries == 1:
       Filetypes[Extention] = []
     Filetypes[Extention].append(file)
   print(Filetypes)
+  
 #Default or Custom folder names
   Rename = input('\nWould you like to rename your new folders? Y/N: ').casefold()
+  
 #Creates new folder if file type exists and if the folder doesn't exist already
   if Rename != 'y':
     if any(filetype in Filetypes for filetype in ImageTypes):
@@ -71,6 +80,7 @@ if Tries == 1:
       PDFFolder = os.path.join(Directory, PDFName)
       os.makedirs(PDFFolder, exist_ok=True)
     print('\nCreated!')
+    
 #Looping through the dictionary and moving the files to their new folders
   print('Moving your files...')
   for extension in Filetypes.keys():
@@ -100,4 +110,4 @@ if Tries == 1:
         else:
           shutil.move(os.path.join(Directory, file), os.path.join(PDFFolder, file))
   print('Files organized!\n')
-  print('This is what the folder looks like now:', ListDirectory)
+  print('This is what the folder looks like now:', os.listdir(Directory))
